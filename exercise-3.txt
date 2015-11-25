@@ -1,0 +1,37 @@
+Exercise 3
+
+List all of the countries with respective occurence totals in DESC order
+Country names should all appear lowercase
+=======================================================================
+
+mysql> SELECT COUNT(*), LOWER(country) FROM Address GROUP BY country ORDER BY COUNT(*) DESC;
++----------+----------------------------------------------+
+| COUNT(*) | LOWER(country)                               |
++----------+----------------------------------------------+
+|       18 | mozambique                                   |
+|       16 | saint helena, ascension and tristan da cunha |
+|       15 | curaçao                                      |
+|       15 | thailand                                     |
+|       15 | wallis and futuna                            |
+|       15 | lebanon                                      |
+|       15 | andorra                                      |
+|       15 | canada                                       |
+|       15 | argentina                                    |
+|       15 | united states minor outlying islands         |
+|       14 | netherlands                                  |
+|       14 | dominica                                     |
+|       14 | brazil                                       |
+|       14 | united arab emirates                         |
+|       14 | ethiopia                                     |
+|       14 | sri lanka                                    |
+|       14 | congo, the democratic republic of the        |
+|       14 | united kingdom (great britain)               |
+|       13 | cook islands                                 |
+|       13 | switzerland                                  |
+|       13 | seychelles                                   |
+|       13 | cocos (keeling) islands                      |
+|        3 | mauritius                                    |
+|        3 | saudi arabia                                 |
+|        2 | niger                                        |
++----------+----------------------------------------------+
+249 rows in set (0.01 sec)
