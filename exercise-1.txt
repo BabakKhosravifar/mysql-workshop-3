@@ -1,0 +1,146 @@
+Exercise-1
+
+mysql> CREATE TABLE Account ( id int NOT NULL AUTO_INCREMENT, PRIMARY KEY (id) );
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> ALTER TABLE Account ADD COLUMN email VARCHAR(100);                                                                                                                    
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Account ADD COLUMN ('password' CHAR(40),'createdOn' DATETIME,'modifiedOn' DATETIME);                                                                      
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''password' CHAR(40),'createdOn' DATETIME,'modifiedOn' DATETIME)' at line 1
+mysql> ALTER TABLE Account ADD COLUMN password CHAR(40), ADD COLUMN createdOn DATETIME, ADD COLUMN modifiedOn DATETIME;                                                      
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe Account;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| email      | varchar(100) | YES  |     | NULL    |                |
+| password   | char(40)     | YES  |     | NULL    |                |
+| createdOn  | datetime     | YES  |     | NULL    |                |
+| modifiedOn | datetime     | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> CREATE TABLE AddressBook ( id int NOT NULL AUTO_INCREMENT, PRIMARY KEY (id) );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ALTER TABLE AddressBook ADD COLUMN accountId INT, ADD COLUMN name VARCHAR(100), ADD COLUMN createdOn DATETIME, ADD COLUMN modifiedOn DATETIME;
+Query OK, 0 rows affected (0.18 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe AddressBook;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| accountId  | int(11)      | YES  |     | NULL    |                |
+| name       | varchar(100) | YES  |     | NULL    |                |
+| createdOn  | datetime     | YES  |     | NULL    |                |
+| modifiedOn | datetime     | YES  |     | NULL    |                |
+mysql> CREATE TABLE Entry ( id int NOT NULL AUTO_INCREMENT, PRIMARY KEY (id) );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ALTER TABLE Entry ADD COLUMN addressBookId INT, ADD COLUMN firstName VARCHAR(100), ADD COLUMN lastName VARCHAR(100), ADD COLUMN birhtday DATETIME, ADD COLUMN type ENUM("phone", "address", "electronic-email");
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> CREATE TABLE Address ( id int NOT NULL AUTO_INCREMENT, PRIMARY KEY (id) );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ALTER TABLE Address ADD COLUMN entryId INT, ADD COLUMN type ENUM("home", "work", "other"), ADD COLUMN addressLine1 VARCHAR(150), ADD COLUMN addressLine2 VARCHAR(50), ADD COLUMN city VARCHAR(50), ADD COLUMN province VARCHAR(50), ADD COLUMN country VARCHAR(50), ADD COLUMN postalCode VARCHAR(10);                                             
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> CREATE TABLE ElectronicMail ( id int NOT NULL AUTO_INCREMENT, PRIMARY KEY (id) );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ALTER TABLE ElectronicMail ADD COLUMN entryId INT, ADD COLUMN type ENUM("home", "work", "other"), ADD COLUMN content VARCHAR(1000);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Phone ( id int NOT NULL AUTO_INCREMENT, PRIMARY KEY (id) );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ALTER TABLE Phone ADD COLUMN entryId INT, ADD COLUMN type ENUM("home", "work", "other"), ADD COLUMN subtype ENUM("landline", "cellular", "fax"), ADD COLUMN content VARCHAR(1000);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe Account;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| email      | varchar(100) | YES  |     | NULL    |                |
+| password   | char(40)     | YES  |     | NULL    |                |
+| createdOn  | datetime     | YES  |     | NULL    |                |
+| modifiedOn | datetime     | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> describe AddressBook;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| accountId  | int(11)      | YES  |     | NULL    |                |
+| name       | varchar(100) | YES  |     | NULL    |                |
+| createdOn  | datetime     | YES  |     | NULL    |                |
+| modifiedOn | datetime     | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> describe Entry;
++---------------+--------------------------------------------+------+-----+---------+----------------+
+| Field         | Type                                       | Null | Key | Default | Extra          |
++---------------+--------------------------------------------+------+-----+---------+----------------+
+| id            | int(11)                                    | NO   | PRI | NULL    | auto_increment |
+| addressBookId | int(11)                                    | YES  |     | NULL    |                |
+| firstName     | varchar(100)                               | YES  |     | NULL    |                |
+| lastName      | varchar(100)                               | YES  |     | NULL    |                |
+| birhtday      | datetime                                   | YES  |     | NULL    |                |
+| type          | enum('phone','address','electronic-email') | YES  |     | NULL    |                |
++---------------+--------------------------------------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> describe address;
+ERROR 1146 (42S02): Table 'decodemtl_addressbook.address' doesn't exist
+mysql> describe Address;                                                                                                                                                     
++--------------+-----------------------------+------+-----+---------+----------------+
+| Field        | Type                        | Null | Key | Default | Extra          |
++--------------+-----------------------------+------+-----+---------+----------------+
+| id           | int(11)                     | NO   | PRI | NULL    | auto_increment |
+| entryId      | int(11)                     | YES  |     | NULL    |                |
+| type         | enum('home','work','other') | YES  |     | NULL    |                |
+| addressLine1 | varchar(150)                | YES  |     | NULL    |                |
+| addressLine2 | varchar(50)                 | YES  |     | NULL    |                |
+| city         | varchar(50)                 | YES  |     | NULL    |                |
+| province     | varchar(50)                 | YES  |     | NULL    |                |
+| country      | varchar(50)                 | YES  |     | NULL    |                |
+| postalCode   | varchar(10)                 | YES  |     | NULL    |                |
++--------------+-----------------------------+------+-----+---------+----------------+
+9 rows in set (0.00 sec)
+
+mysql> describe ElectronicMail;
++---------+-----------------------------+------+-----+---------+----------------+
+| Field   | Type                        | Null | Key | Default | Extra          |
++---------+-----------------------------+------+-----+---------+----------------+
+| id      | int(11)                     | NO   | PRI | NULL    | auto_increment |
+| entryId | int(11)                     | YES  |     | NULL    |                |
+| type    | enum('home','work','other') | YES  |     | NULL    |                |
+| content | varchar(1000)               | YES  |     | NULL    |                |
++---------+-----------------------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> describe Phone;
++---------+-----------------------------------+------+-----+---------+----------------+
+| Field   | Type                              | Null | Key | Default | Extra          |
++---------+-----------------------------------+------+-----+---------+----------------+
+| id      | int(11)                           | NO   | PRI | NULL    | auto_increment |
+| entryId | int(11)                           | YES  |     | NULL    |                |
+| type    | enum('home','work','other')       | YES  |     | NULL    |                |
+| subtype | enum('landline','cellular','fax') | YES  |     | NULL    |                |
+| content | varchar(1000)                     | YES  |     | NULL    |                |
++---------+-----------------------------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
